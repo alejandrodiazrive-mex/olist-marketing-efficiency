@@ -21,6 +21,16 @@ Budget Leakage: Social Media generates the highest volume of leads but shows the
 Sales Velocity: Leads from Direct Traffic close deals 30% faster than those from paid advertising channels.
 
 ![Gráfico de Dispersión Olist](viz/conversion_vs_velocity.PNG)
+
+
+
+## ⚙️ Project Scope & Limitations
+To maintain analytical rigor, the following boundaries were established for this study:
+* **Proxy for Success:** Conversion is measured by `won_date`. Financial value (Revenue) per deal was not included in this phase as it requires a secondary join with order items.
+* **Cost Data:** CAC (Customer Acquisition Cost) is not calculated because marketing spend per channel was not provided in the dataset.
+* **Attribution:** This analysis uses a "First Touch" attribution model based on the `first_contact_date`.
+
+
 📁 Repository Structure
 
 olist_analysis.sql: Core query implementing funnel logic and deal closing time calculations.
@@ -31,4 +41,4 @@ README.md: Project documentation.
 
 💡 Strategic Recommendation
 
-It is recommended to reduce investment in Social Media advertising and reallocate budget toward Paid Search. Additionally, the sales process for social media leads should be audited due to their significantly longer response and closing times.
+💡 Efficiency Trade-off Identified: While Social Media generates a high volume of leads (1,350), it presents the lowest conversion rate (5.5%) and the longest sales cycle (61 days). Recommendation for Stakeholders: Audit the sales script for Social leads or consider reallocating 15-20% of the Social budget toward Paid Search, which closes deals in a similar timeframe but with a 2x higher conversion rate.
