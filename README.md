@@ -1,28 +1,23 @@
-📊 Olist Marketing Funnel: Conversion Optimization
-🎯 Business Case
+# Olist Marketing Funnel: Conversion & Efficiency Optimization
+### 📊 SQL-Based Lead Performance Analysis
 
-Olist aims to understand which marketing channels are truly profitable.
-This analysis identifies bottlenecks in the sales funnel by comparing lead generation performance against actual deal closures.
+**Author:** Alejandro Diaz  
+**Role:** Data Analyst | Business Intelligence Focus
 
-🛠️ Tools Used
+---
 
-SQL (PostgreSQL): Data cleaning and relational modeling between MQLs and closed deals.
+## 🎯 Business Case
+Olist seeks to identify which marketing channels are most **efficient** at converting leads into closed deals. This project focuses on SQL execution and KPI analysis from a junior data analyst perspective, identifying bottlenecks in the sales funnel by comparing lead generation volume against sales velocity.
 
-Google Sheets: Quick validation of data volume and quality.
+---
 
-Power BI: Interactive dashboard for monitoring conversion KPIs.
+## 📈 Key Findings (Data Insights)
 
-📈 Key Findings (Data Insights)
+* **Channel Efficiency:** **Paid Search** and **Organic Search** lead the funnel performance, with conversion rates above 11%.
+* **Efficiency Gap:** **Social Media** generates the highest volume of leads (1,350) but shows the weakest conversion performance (5.5%) and the longest sales cycle (61 days).
+* **Sales Velocity:** Leads from **Direct Traffic** close deals 30% faster than those from paid advertising channels, suggesting higher intent.
 
-Channel Efficiency: Paid Search and Organic Search lead conversion performance, with conversion rates above 11%.
-
-Budget Leakage: Social Media generates the highest volume of leads but shows the weakest performance, with only a 5.5% conversion rate and an average 61-day sales cycle (the slowest across the company).
-
-Sales Velocity: Leads from Direct Traffic close deals 30% faster than those from paid advertising channels.
-
-![Gráfico de Dispersión Olist](viz/conversion_vs_velocity.PNG)
-
-
+---
 
 ## ⚙️ Project Scope & Limitations
 To maintain analytical rigor, the following boundaries were established for this study:
@@ -30,15 +25,31 @@ To maintain analytical rigor, the following boundaries were established for this
 * **Cost Data:** CAC (Customer Acquisition Cost) is not calculated because marketing spend per channel was not provided in the dataset.
 * **Attribution:** This analysis uses a "First Touch" attribution model based on the `first_contact_date`.
 
+---
 
-📁 Repository Structure
+## 💡 Strategic Recommendations
 
-olist_analysis.sql: Core query implementing funnel logic and deal closing time calculations.
+**Efficiency Trade-off Identified:** While Social Media generates a high volume of leads, it presents the lowest conversion rate and the slowest sales cycle across the company. 
 
-data/: Original datasets for Marketing Qualified Leads (MQLs) and Closed Deals.
+**Recommendations for Stakeholders:** 1.  **Audit the sales script** for Social Media leads to identify friction points.
+2.  **Trial Budget Reallocation:** Consider reallocating 15-20% of the Social budget toward **Paid Search**, which demonstrates a similar sales cycle but a **2x higher conversion rate**.
 
-README.md: Project documentation.
+---
 
-💡 Strategic Recommendation
+## 📁 Repository Structure
 
-💡 Efficiency Trade-off Identified: While Social Media generates a high volume of leads (1,350), it presents the lowest conversion rate (5.5%) and the longest sales cycle (61 days). Recommendation for Stakeholders: Audit the sales script for Social leads or consider reallocating 15-20% of the Social budget toward Paid Search, which closes deals in a similar timeframe but with a 2x higher conversion rate.
+| File | Description | Business Logic |
+| :--- | :--- | :--- |
+| **01_marketing_conversion_funnel.sql** | Core Query | Implements funnel logic, conversion rates, and sales velocity. |
+| **02_sales_velocity_outliers.sql** | Friction Audit | Identifies leads with "Critical Lag" (>2x average days to close). |
+| **data/** | Source Datasets | Original Marketing Qualified Leads (MQLs) and Closed Deals data. |
+
+---
+
+## 💻 Technical Stack
+* **SQL (PostgreSQL):** Relational modeling, CTEs, Window Functions, Interval calculations.
+* **Business Intelligence:** Funnel Metrics, Sales Velocity, Outlier Detection.
+* **Visualization:** Scatter plots for Conversion vs. Velocity.
+
+---
+*"Translating funnel data into operational growth opportunities."*
