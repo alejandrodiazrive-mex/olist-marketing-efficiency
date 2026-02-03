@@ -1,55 +1,33 @@
-# Olist Marketing Funnel: Conversion & Efficiency Optimization
-### 📊 SQL-Based Lead Performance Analysis
+# Sales Pipeline Efficiency & Lead Quality Analysis
 
-**Author:** Alejandro Diaz  
-**Role:** Data Analyst | Business Intelligence Focus
+## 🎯 The Business Challenge
+In a high-growth environment, the most expensive resource is the **Sales Team's time**. This analysis identifies which marketing channels provide the best "Return on Effort" by analyzing lead quality vs. sales velocity.
 
----
+## 📊 Key Insights (The "No-Bullshit" Version)
 
-## 🎯 Business Case
-Olist seeks to identify which marketing channels are most **efficient** at converting leads into closed deals. This project focuses on SQL execution and KPI analysis from a junior data analyst perspective, identifying bottlenecks in the sales funnel by comparing lead generation volume against sales velocity.
+### 1. The Social Media "Friction" Trap
+Social Media has the lowest **Efficiency Index (0.09)**. 
+* **The Problem:** It takes **61 days** to close, and only **5%** of leads are "High Value" (Big/Medium companies). 
+* **Business Impact:** The SDR (Sales Development Rep) team spends 2x more effort for a lower-quality payoff compared to other channels.
 
----
+### 2. The "Gold Mine": Organic Search & Direct Traffic
+These channels are the "Efficiency Leaders":
+* **Organic Search:** High conversion with a **1.6 Efficiency Index**. It brings 20% more High-Value Leads than Social.
+* **Direct Traffic:** The fastest channel (**31 days to close**), showing high brand intent and immediate sales ROI.
 
-## 📈 Key Findings (Data Insights)
+## 🛠 Strategic Recommendations (Pipeline Optimization)
+* **Reallocate Sales Focus:** Prioritize leads from **Organic/Direct** in the CRM for immediate follow-up (high intent).
+* **Automate the "Tail":** For Social Media leads (slow & low value), implement automated email nurturing instead of manual SDR outreach to protect sales capacity.
+* **Content Pivot:** Since Organic Search brings the highest quality, double down on SEO keywords targeting "Industry" and "Online Big" segments.
 
-* **Channel Efficiency:** **Paid Search** and **Organic Search** lead the funnel performance, with conversion rates above 11%.
-* **Efficiency Gap:** **Social Media** generates the highest volume of leads (1,350) but shows the weakest conversion performance (5.5%) and the longest sales cycle (61 days).
-* **Sales Velocity:** Leads from **Direct Traffic** close deals 30% faster than those from paid advertising channels, suggesting higher intent.
+## 💻 Tech Stack
+* **SQL (PostgreSQL):** CTEs for lead scoring, time-interval analysis, and efficiency indexing.
+* **Analysis:** Lead Quality Segmentation & Sales Velocity Correlation.
 
----
 
-## ⚙️ Project Scope & Limitations
-To maintain analytical rigor, the following boundaries were established for this study:
-* **Proxy for Success:** Conversion is measured by `won_date`. Financial value (Revenue) per deal was not included in this phase as it requires a secondary join with order items.
-* **Cost Data:** CAC (Customer Acquisition Cost) is not calculated because marketing spend per channel was not provided in the dataset.
-* **Attribution:** This analysis uses a "First Touch" attribution model based on the `first_contact_date`.
-
----
-
-## 💡 Strategic Recommendations
-
-**Efficiency Trade-off Identified:** While Social Media generates a high volume of leads, it presents the lowest conversion rate and the slowest sales cycle across the company. 
-
-**Recommendations for Stakeholders:** 1.  **Audit the sales script** for Social Media leads to identify friction points.
-2.  **Trial Budget Reallocation:** Consider reallocating 15-20% of the Social budget toward **Paid Search**, which demonstrates a similar sales cycle but a **2x higher conversion rate**.
-
----
-
-## 📁 Repository Structure
-
-| File | Description | Business Logic |
-| :--- | :--- | :--- |
-| **01_marketing_conversion_funnel.sql** | Core Query | Implements funnel logic, conversion rates, and sales velocity. |
-| **02_sales_velocity_outliers.sql** | Friction Audit | Identifies leads with "Critical Lag" (>2x average days to close). |
-| **data/** | Source Datasets | Original Marketing Qualified Leads (MQLs) and Closed Deals data. |
-
----
-
-## 💻 Technical Stack
-* **SQL (PostgreSQL):** Relational modeling, CTEs, Window Functions, Interval calculations.
-* **Business Intelligence:** Funnel Metrics, Sales Velocity, Outlier Detection.
-* **Visualization:** Scatter plots for Conversion vs. Velocity.
-
----
-*"Translating funnel data into operational growth opportunities."*
+| File | Business Logic | Key Insight |
+|------|---------------|-------------|
+| `00_data_quality_audit.sql` | **Data Validation** | Integrity check for nulls and date inconsistencies. |
+| `01_marketing_conversion_funnel.sql` | Basic funnel metrics | Identifies conversion leaders. |
+| `02_sales_velocity_outliers.sql` | Ops Audit | Flags deals causing friction ("Critical Lag"). |
+| `03_lead_quality_efficiency.sql` | **Capital Efficiency** | **Identifies channels with best Quality/Speed ratio.** |
