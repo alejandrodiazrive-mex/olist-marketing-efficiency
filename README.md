@@ -20,14 +20,24 @@ These channels are the "Efficiency Leaders":
 * **Automate the "Tail":** For Social Media leads (slow & low value), implement automated email nurturing instead of manual SDR outreach to protect sales capacity.
 * **Content Pivot:** Since Organic Search brings the highest quality, double down on SEO keywords targeting "Industry" and "Online Big" segments.
 
+## 📊 Key Insights (The "No-Bullshit" Version)
+
+![Conversion vs Velocity](viz/conversion_vs_velocity.PNG)
+
+*Figure 1: Relationship between Conversion Rate and Sales Velocity by Channel.*
+
+
 ## 💻 Tech Stack
 * **SQL (PostgreSQL):** CTEs for lead scoring, time-interval analysis, and efficiency indexing.
 * **Analysis:** Lead Quality Segmentation & Sales Velocity Correlation.
 
 
+## 📁 Repository Structure
+
 | File | Business Logic | Key Insight |
-|------|---------------|-------------|
+| :--- | :--- | :--- |
 | `00_data_quality_audit.sql` | **Data Validation** | Integrity check for nulls and date inconsistencies. |
-| `01_marketing_conversion_funnel.sql` | Basic funnel metrics | Identifies conversion leaders. |
-| `02_sales_velocity_outliers.sql` | Ops Audit | Flags deals causing friction ("Critical Lag"). |
-| `03_lead_quality_efficiency.sql` | **Capital Efficiency** | **Identifies channels with best Quality/Speed ratio.** |
+| `01_marketing_conversion_funnel.sql` | **Funnel Metrics** | Identifies conversion leaders and volume drivers. |
+| `02_sales_velocity_outliers.sql` | **Ops Audit** | Flags deals causing friction ("Critical Lag"). |
+| `03_lead_quality_efficiency.sql` | **Efficiency Index** | Identifies channels with best Quality/Speed ratio. |
+| `marketing_velocity_dashboard.pbix` | **Visualization** | Interactive dashboard for stakeholder reporting. |
