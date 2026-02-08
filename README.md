@@ -60,15 +60,23 @@ These channels are the **Efficiency Leaders**.
 
 ---
 
-## 📁 Repository Structure
+## 🏗 Analytics Architecture (Modern Data Stack)
 
-| File | Business Logic | Key Insight |
+This project has migrated from ad-hoc SQL scripts to a production-ready data pipeline using **dbt Core** and **BigQuery**.
+
+| Directory / File | Description | Layer Type |
 | :--- | :--- | :--- |
-| `00_data_quality_audit.sql` | **Data Validation** | Critical checks for orphaned deals and date consistency. |
-| `01_marketing_conversion_funnel.sql` | **Funnel Metrics** | High-level conversion performance by channel. |
-| `02_sales_velocity_outliers.sql` | **Ops Audit** | Identifies “Critical Lag” deals (2× average sales cycle). |
-| `03_lead_quality_efficiency.sql` | **Portfolio ROI** | **Segments won deals into Strategic Quadrants (Scale vs. Automate).** |
-| `marketing_velocity_dashboard.pbix` | **Visualization** | Interactive view for stakeholder reporting. |
+| `olist_project/models/staging` | Cleans raw data, casts data types, and standardizes formats. | **Staging Layer** |
+| `olist_project/models/marts` | Joins tables and calculates business logic (Velocity, Efficiency Index). | **Serving Layer** |
+| `olist_project/tests` | Automated data quality checks (Unique keys, Not Null constraints). | **Testing** |
+| `legacy_analysis/` | Original exploratory SQL scripts (Reference). | **Archive** |
+| `marketing_velocity_dashboard.pbix` | Power BI Dashboard connected to BigQuery/dbt models. | **Viz** |
+
+### 🔧 Engineering Decisions
+* **Orchestration:** dbt Core
+* **Warehouse:** Google BigQuery
+* **Authentication:** OAuth 2.0 (Security Best Practice)
+* **Modeling Strategy:** Modular Data Lineage (Staging -> Marts)
 
 ---
 
