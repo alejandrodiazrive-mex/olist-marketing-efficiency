@@ -1,8 +1,7 @@
 {{ config(materialized='view') }}
 
 WITH raw_mql AS (
-    SELECT * FROM `project-fa28f216-1d33-4c50-a13.olist_raw.olist_marketing_qualified_leads_dataset`
-)
+    SELECT * FROM {{ source('olist_raw', 'olist_marketing_qualified_leads_dataset') }}
 
 SELECT
     mql_id,

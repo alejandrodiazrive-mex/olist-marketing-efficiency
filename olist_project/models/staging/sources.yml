@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    database: project-fa28f216-1d33-4c50-a13
+    schema: olist_raw
+    tables:
+      - name: olist_marketing_qualified_leads_dataset
+      - name: olist_closed_deals_dataset
