@@ -1,5 +1,6 @@
 WITH raw_deals AS (
-   SELECT * FROM {{ source('olist_raw', 'olist_closed_deals_dataset') }}
+    SELECT * FROM {{ source('olist_raw', 'olist_closed_deals_dataset') }}
+)
 
 SELECT
     mql_id,
