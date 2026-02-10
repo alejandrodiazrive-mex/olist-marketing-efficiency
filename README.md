@@ -1,89 +1,68 @@
-# Sales Pipeline Efficiency & Lead Quality Analysis
+# Revenue Efficiency & GTM Analytics (SaaS Series B Framework)
 
-## 🎯 The Business Challenge
-In a high-growth environment, the most expensive and constrained resource is the **Sales Team’s time**.  
-This analysis identifies which marketing channels deliver the best **Return on Effort**, by balancing **lead quality** against **sales velocity**, in order to protect sales capacity and accelerate learning cycles.
+## 🎯 Strategic Context
+In a Series B scaling phase, capital efficiency is the priority. This project migrates a legacy SQL analysis to a **Modern Data Stack (dbt + BigQuery)** to optimize the **LTV/CAC Ratio**. 
 
----
-
-## 📊 Key Insights (The “No-Bullshit” Version)
-
-### 1. The Social Media “Friction” Trap
-Social Media shows the **lowest Efficiency Index (0.09)**.
-
-- **The Problem:**  
-  Deals take **61 days** to close, and only **~5%** of leads qualify as High Value (medium/big companies).
-- **Business Impact:**  
-  SDRs spend **~2× more time** per deal for a lower-quality payoff, creating a bottleneck in sales capacity.
+The goal is to identify friction in Sales Velocity and misalignments with our **Ideal Customer Profile (ICP)**, moving from "vanity metrics" (lead volume) to "efficiency metrics" (revenue per rep/day).
 
 ---
 
-### 2. The “Gold Mine”: Organic Search & Direct Traffic
-These channels are the **Efficiency Leaders**.
+## 📊 High-Level Revenue Insights
 
-- **Organic Search:**  
-  Highest overall efficiency (**Efficiency Index ≈ 1.6**), with a stronger mix of High-Value leads.
-- **Direct Traffic:**  
-  Fastest sales cycle (**~31 days to close**), indicating high brand intent and immediate pipeline impact.
+### 1. The "Cash Flow" Bottleneck: Social Media
+* **The Problem:** Deals from Social Media take **61 days** to close (2x the average).
+* **Financial Impact:** This extends the **Payback Period** and increases CAC due to high SDR effort on low-conversion leads.
+* **Recommendation:** Shift these leads to an automated nurturing track (HubSpot/Marketo) to protect expensive human sales capacity.
 
----
+### 2. The Efficiency Engine: Organic Search
+* **The Win:** Highest Efficiency Index (**1.6**) with a fast sales cycle (~30 days).
+* **Strategic Action:** Reallocate SDR headcount to prioritize these leads immediately (SLA < 2 hours) to maximize conversion on high-intent traffic.
 
-## 🛠 Strategic Recommendations (Pipeline Optimization)
-
-- **Reallocate Sales Focus:**  
-  Prioritize **Organic Search** and **Direct Traffic** leads in the CRM for immediate SDR follow-up.
-- **Protect Sales Capacity:**  
-  For **Social Media** leads (slow & low-value), shift from manual SDR outreach to **automated nurturing**.
-- **Content & SEO Pivot:**  
-  Double down on keywords and content targeting **Industry** and **Online Big** segments, which correlate with higher efficiency.
-
----
-
-## 📈 Visual Insight
-
-![Conversion vs Velocity](viz/conversion_vs_velocity.PNG)
-
-*Figure 1: Relationship between conversion rate and sales velocity by acquisition channel.*
-
----
-
-## 💻 Tech Stack & Analytical Approach
-
-- **SQL (PostgreSQL):**  
-  CTEs, date arithmetic, segmentation logic, and efficiency scoring.
-- **Analysis Focus:**  
-  Lead Quality Segmentation × Sales Velocity to optimize **sales effort allocation**.
-
-> **Note on Lead Quality Scoring**  
-> The `quality_score` used in this analysis is a **relative proxy**, not a financial metric.  
-> It is derived from `lead_type` hierarchy and is designed to compare **sales effort efficiency**, not to estimate revenue or profit.
+### 3. Data Integrity & "Unknown" Leakage
+* **Audit Finding:** Detected 5% of leads with `NULL` origin during the migration.
+* **Engineering Fix:** Implemented a `COALESCE` logic in the Staging Layer to tag these as "Unknown" rather than dropping them, preserving funnel integrity for Marketing attribution audits.
 
 ---
 
 ## 🏗 Analytics Architecture (Modern Data Stack)
 
-This project has migrated from ad-hoc SQL scripts to a production-ready data pipeline using **dbt Core** and **BigQuery**.
+This project moves beyond ad-hoc scripts to a production-grade pipeline using **ELT principles**.
 
-| Directory / File | Description | Layer Type |
-| :--- | :--- | :--- |
-| `olist_project/models/staging` | Cleans raw data, casts data types, and standardizes formats. | **Staging Layer** |
-| `olist_project/models/marts` | Joins tables and calculates business logic (Velocity, Efficiency Index). | **Serving Layer** |
-| `olist_project/tests` | Automated data quality checks (Unique keys, Not Null constraints). | **Testing** |
-| `legacy_analysis/` | Original exploratory SQL scripts (Reference). | **Archive** |
-| `marketing_velocity_dashboard.pbix` | Power BI Dashboard connected to BigQuery/dbt models. | **Viz** |
-
-### 🔧 Engineering Decisions
-* **Orchestration:** dbt Core
-* **Warehouse:** Google BigQuery
-* **Authentication:** OAuth 2.0 (Security Best Practice)
-* **Modeling Strategy:** Modular Data Lineage (Staging -> Marts)
+### 🔧 Tech Stack
+* **Warehouse:** Google BigQuery (Standard SQL)
+* **Transformation:** dbt Core (Jinja Templating, Macros)
+* **Orchestration:** Directed Acyclic Graph (DAG) via dbt
+* **Data Quality:** Automated schema tests (Unique, Not Null)
 
 ### 🔗 Data Lineage
 ![Data Lineage](viz/dbt_lineage.png)
-*Visual representation of the automated data pipeline from BigQuery (Raw) to Staging and Business Marts.*
+*Automated pipeline flow: From Raw Data (BigQuery Source) → Staging (Cleaning/Casting) → Marts (Business Logic).*
 
 ---
 
-## 🧠 Why This Matters
-When cost and revenue data are incomplete, early-stage teams still need to make decisions.  
-This analysis focuses on what *can* be controlled: **sales effort, velocity, and lead quality**—providing a practical framework for pipeline optimization without relying on speculative financial assumptions.
+## 🛠 Strategic Decision Framework
+
+This data product enables the following GTM decisions:
+
+| Scenario (Data Trigger) | Strategic Action |
+| :--- | :--- |
+| **Velocity Drop:** `days_to_revenue` > 45 days | Trigger "High-Touch" sales intervention for Mid-Market accounts. |
+| **ICP Mismatch:** Low conversion in `High-Tier` segment | Review Marketing messaging alignment with Product features. |
+| **Quality Alert:** `stg_mql` tests fail | Halt downstream reporting updates to prevent polluted dashboards. |
+
+---
+
+## 📂 Repository Structure
+
+| Directory | Layer Type | Description |
+| :--- | :--- | :--- |
+| `olist_project/models/staging` | **Bronze/Silver** | Cleans raw data, handles NULLs (`COALESCE`), and standardizes dates. |
+| `olist_project/models/marts` | **Gold** | Joins tables to calculate `days_to_revenue` and segments by `icp_profile`. |
+| `olist_project/tests` | **QA** | Automated assertions to ensure `mql_id` uniqueness and referential integrity. |
+| `legacy_analysis/` | **Archive** | Original exploratory SQL scripts (kept for historical context). |
+
+---
+
+## 🧠 Why This Matters (The "Senior" Take)
+When scaling a SaaS, **Speed to Revenue** is the ultimate metric. 
+By implementing this architecture, we decouple "Data Cleaning" from "Business Analysis," allowing the Revenue Operations team to trust the numbers and focus on closing deals, while the pipeline ensures data quality automatically.
